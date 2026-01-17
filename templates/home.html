@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lebanon Housing Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🏠 Housing Price Prediction</h1>
+    <p class="subtitle">Estimate property prices in Lebanon</p>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+        <div class="form-group">
+            <label>Area (sqm)</label>
+            <input type="number" name="area_sqm" step="any" placeholder="e.g. 120" required>
+        </div>
+
+        <div class="form-group">
+            <label>Bedrooms</label>
+            <input type="number" name="bedrooms" placeholder="e.g. 3" required>
+        </div>
+
+        <div class="form-group">
+            <label>Bathrooms</label>
+            <input type="number" name="bathrooms" placeholder="e.g. 2" required>
+        </div>
+
+        <div class="form-group">
+            <label>Property Age (years)</label>
+            <input type="number" name="property_age_years" placeholder="e.g. 10" required>
+        </div>
+
+        <div class="form-group">
+            <label>Distance to Beirut (km)</label>
+            <input type="number" name="distance_to_beirut_km" step="any" placeholder="e.g. 15.5" required>
+        </div>
+
+        <div class="form-group">
+            <label>Quality Score (1–10)</label>
+            <input type="number" name="quality_score" step="any" placeholder="e.g. 8.5" required>
+        </div>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if result %}
+        <div class="result">
+            💰 Estimated Price: ${{ result }}
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        Powered by Machine Learning · Flask App
+    </div>
+</div>
+
+</body>
+</html>
